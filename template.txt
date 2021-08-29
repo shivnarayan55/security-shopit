@@ -1,0 +1,8 @@
+{
+  "Template": {
+    "TemplateName": "VerificationTemplate",
+    "SubjectPart": "Verification Email | Click here to verify!",
+    "HtmlPart": "<h1>Hello {{name}},</h1><p>Thank you for registering! Click here to activate account! {{activationLink}}.</p>",
+    "TextPart": "Dear {{name}},\r\nThank you for registering! Click here to activate account! {{activationLink}}."
+  }
+}

@@ -1,0 +1,105 @@
+
+
+Steps to run the code
+
+1. Add your generated keystore file "jwt.jks" to src/main/resources
+
+2. Add your Private and Public Keys to the application.yml file to configure the appliation
+
+3. Setup an clientId and clientSecret, default values have been filled in
+
+4. Setup build path to run Jdk 1.8
+
+5. After running, update spring-jpa-generate-dll to update, to update values from existing pool of tables for further runs
+
+
+{
+  "Template": {
+    "TemplateName": "VerificationTemplate",
+    "SubjectPart": "Verification Email | Click here to verify!",
+    "HtmlPart": "<h1>Hello {{name}},</h1><p>Thank you for registering! Click here to activate account! {{activationLink}}.</p>",
+    "TextPart": "Dear {{name}},\r\nThank you for registering! Click here to activate account! {{activationLink}}."
+  }
+}
+
+
+	@GetMapping("/email")
+	public String sendEmail() {
+		return UserService.sendEmail();
+	}
+	
+	package com.org.security.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
+import com.amazonaws.services.simpleemail.model.Destination;
+import com.amazonaws.services.simpleemail.model.SendTemplatedEmailRequest;
+
+@Service
+public class UserService {
+
+	@Value("${accessKey}")
+	private String accessKey;
+	
+	@Value("${secretKey}")
+	private String secretKey;
+	
+	@Value("${region}")
+	private String region;
+	
+	public String from = "satya.kar98@gmail.com";
+	public String[] to = {"satya.kar98@gmail.com"};
+	private String templateName = "template";
+	
+	private String templateData = "{ \"name\":\"Shadow\", \"activationLink\": \"XYXYXYXYXY\"}";
+	
+	public String sendEmail() {
+
+		AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+		com.amazonaws.services.simpleemail.AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder
+				.standard().withCredentials(new AWSStaticCredentialsProvider(credentials)).withRegion(region).build();
+
+		Destination destination = new Destination();
+		List<String> toAddresses = new ArrayList<String>();
+		String[] Emails = to;
+
+
+		for (String email : Emails) {
+			toAddresses.add(email);
+		}
+
+		destination.setToAddresses(toAddresses);
+		SendTemplatedEmailRequest templatedEmailRequest = new SendTemplatedEmailRequest();
+		templatedEmailRequest.withDestination(destination);
+		templatedEmailRequest.withTemplate(templateName);
+		templatedEmailRequest.withTemplateData(templateData);
+		templatedEmailRequest.withSource(from);
+		client.sendTemplatedEmail(templatedEmailRequest);
+		return "Verification Email sent Successfully!";
+	}
+	
+	accessKey=AKIA2NOU6ONXKDZFWLXS
+secretKey=Xo7xLmFzC2UCJkbsKDiHjQyT2TeGuQZB0UCJFbHV
+region=ap-south-1
+
+mail.smtp.host={YOUR_SES_SMTP_HOST}
+mail.smtp.port={YOUR_SES_SMTP_PORT}
+mail.smtp.username={YOUR_SES_SMTP_USERNAME}
+mail.smtp.password={YOUR_SES_SMTP_PASSWORD}
+mail.from={YOUR_FROM_EMAIL}
+mail.from-name={YOUR_FROM_NAME}
+	
+	
+	
+
+
+}
+	
