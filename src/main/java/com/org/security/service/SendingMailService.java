@@ -62,9 +62,10 @@ public class SendingMailService {
 
     private boolean sendMail(String toEmail, String subject, String body) {
         try {
+        	String port = System.getenv("SMTPPORT");
             Properties props = System.getProperties();
             props.put("mail.transport.protocol", "smtp");
-            props.put("mail.smtp.port", mailProperties.getSmtp().getPort());
+            props.put("mail.smtp.port", port);
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.auth", "true");
 
@@ -72,13 +73,13 @@ public class SendingMailService {
             session.setDebug(true);
 
             MimeMessage msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress(mailProperties.getFrom(), mailProperties.getFromName()));
+            msg.setFrom(new InternetAddress(System.getenv("FROM"), System.getenv("NAME")));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
             msg.setSubject(subject);
             msg.setContent(body, "text/html");
 
             Transport transport = session.getTransport();
-            transport.connect(mailProperties.getSmtp().getHost(), mailProperties.getSmtp().getUsername(), mailProperties.getSmtp().getPassword());
+            transport.connect(System.getenv("HOST"), System.getenv("USERNAME"), System.getenv("PASSWORD"));
             transport.sendMessage(msg, msg.getAllRecipients());
             return true;
         } catch (Exception ex) {
