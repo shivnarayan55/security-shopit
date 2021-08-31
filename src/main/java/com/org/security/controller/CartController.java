@@ -30,7 +30,7 @@ public class CartController {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	String baseUrl = "http://localhost:8081";
+	String baseUrl = "http://Shopitproducts-env.eba-pqdd3ppe.ap-south-1.elasticbeanstalk.com";
 	
 	@GetMapping("/{userId}")
 	public List<Cartdto> viewCartByUserId(@PathVariable int userId) {
