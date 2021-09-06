@@ -4,7 +4,10 @@ phases:
   build:
     commands:
       - echo Entered the build phase...
-      - mvn clean install package
+      - mvn clean
+      - mvn --update-snapshots
+      - mvn install
+      - mvn package
   post_build:
     commands:
       - echo Build completed successfully
