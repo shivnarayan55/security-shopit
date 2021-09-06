@@ -4,12 +4,14 @@ phases:
   build:
     commands:
       - echo Entered the build phase...
-      - mvn clean
-      - mvn install
-      - mvn package
+      - mvn clean install
+      
+      
   post_build:
     commands:
+      - mvn package
       - echo Build completed successfully
+      
 artifacts:
   files:
     - target/shop-it-security.jar
