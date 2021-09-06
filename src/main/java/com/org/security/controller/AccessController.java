@@ -83,7 +83,7 @@ public class AccessController {
 	}
 	
 	@PostMapping("/setRole")
-	public String setRole(@RequestBody UserRole userRole) {
+	public UserRole setRole(@RequestBody UserRole userRole) {
 		
 
 		
@@ -124,6 +124,8 @@ public class AccessController {
 	public List<UserRole> getUserRole() {
 		return userRoleRepository.findAll();
 	}
+	
+	
 	
 	
 
@@ -173,31 +175,24 @@ public class AccessController {
 
 	}
 
-	@PutMapping("/updatepermissionsByRoleID")
-	public String updatepermissionsByRoleIDAndResourceId(@RequestBody ResourcePerm resourcePerm) {
-
-		System.out.println("inside update ");
-
-		return accessService.updatepermissionsByRoleIDAndResourceId(resourcePerm);
-
-	}
+	
 
 	
-	  @GetMapping("/getPermissionsByRoleName/{roleName}")
-	  public ResourcePerm getPermissionsByRoleName(@PathVariable String roleName){
-		  
-		  Role role=getByRoleName(roleName);
-		  
-		  List<RolePermission> rolepermlist=  accessService.getPermissionsByRoleId(role.getRoleID());
-		  
-		  ResourcePerm resourcePerm=new ResourcePerm();
-		  
-		  resourcePerm.setRoleName(roleName);
-		  resourcePerm.setPermissionList(rolepermlist);
-		  
-		  
-	  return resourcePerm;
-	  }
+//	  @GetMapping("/getPermissionsByRoleName/{roleName}")
+//	  public ResourcePerm getPermissionsByRoleName(@PathVariable String roleName){
+//		  
+//		  Role role=getByRoleName(roleName);
+//		  
+//		  List<RolePermission> rolepermlist=  accessService.getPermissionsByRoleId(role.getRoleID());
+//		  
+//		  ResourcePerm resourcePerm=new ResourcePerm();
+//		  
+//		  resourcePerm.setRoleName(roleName);
+//		  resourcePerm.setPermissionList(rolepermlist);
+//		  
+//		  
+//	  return resourcePerm;
+//	  }
 	 
 	  
 

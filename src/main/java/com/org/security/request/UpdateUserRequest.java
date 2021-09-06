@@ -9,6 +9,17 @@ public class UpdateUserRequest {
 	private String email;
 	private String username;
 	private String name;
+	
+	public UpdateUserRequest(String authority, String roleId, String userId, String email, String username,
+			String name) {
+		super();
+		this.authority = authority;
+		this.roleId = roleId;
+		this.userId = userId;
+		this.email = email;
+		this.username = username;
+		this.name = name;
+	}
 	public String getAuthority() {
 		return authority;
 	}
@@ -44,6 +55,11 @@ public class UpdateUserRequest {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "UpdateUserRequest [authority=" + authority + ", roleId=" + roleId + ", userId=" + userId + ", email="
+				+ email + ", username=" + username + ", name=" + name + "]";
 	}
 	
 	

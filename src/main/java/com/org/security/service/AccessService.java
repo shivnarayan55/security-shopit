@@ -23,10 +23,10 @@ public interface AccessService {
 	
 	public Role getByRoleName(String roleName);
 	
-	public String updatepermissionsByRoleIDAndResourceId( ResourcePerm resourcePerm);
+//	public String updatepermissionsByRoleIDAndResourceId( ResourcePerm resourcePerm);
 	public String deleteResource(int id);
 	public String deleteRole(int id);
-	public String setRole(UserRole userRole);
+	public UserRole setRole(UserRole userRole);
 	public List<Role> getAllRoles();
 	public String deleteRoleById(int roleId);
 	public List<Resource> viewAllResources();

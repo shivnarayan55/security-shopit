@@ -123,6 +123,16 @@ public class User{
 
 
 
+	public User(Long id, String authority, String name, String username, @Email String email, String password) {
+		super();
+		this.id = id;
+		this.authority = authority;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+	}
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub

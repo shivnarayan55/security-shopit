@@ -84,34 +84,34 @@ public class AccessServiceImpl implements AccessService {
 		return roleRepository.findByroleName(roleName);
 	}
 
-	@Override
-	public String updatepermissionsByRoleIDAndResourceId(ResourcePerm resourcePerm) {
-
-		Role role=getByRoleName(resourcePerm.getRoleName());
-
-		System.out.println(resourcePerm.getPermissionList());
-
-		for(RolePermission p:resourcePerm.getPermissionList()) {
-
-			p.setRoleId(role.getRoleID());
-		}
-
-		System.out.println(resourcePerm);
-
-		for(RolePermission p:resourcePerm.getPermissionList()) {
-
-			RolePermission rp=permissionRepository.findByRoleIdAndResourceId(p.getRoleId(),p.getResourceId());
-
-			rp.setCanView(p.isCanView());
-			rp.setCanEdit(p.isCanEdit());
-			rp.setCanAdd(p.isCanAdd());
-			rp.setCanDelete(p.isCanDelete());
-			System.out.println(rp);
-			permissionRepository.save(rp);
-
-		}
-		return "success";
-	}
+//	@Override
+//	public String updatepermissionsByRoleIDAndResourceId(ResourcePerm resourcePerm) {
+//
+//		Role role=getByRoleName(resourcePerm.getRoleName());
+//
+//		System.out.println(resourcePerm.getPermissionList());
+//
+//		for(RolePermission p:resourcePerm.getPermissionList()) {
+//
+//			p.setRoleId(role.getRoleID());
+//		}
+//
+//		System.out.println(resourcePerm);
+//
+//		for(RolePermission p:resourcePerm.getPermissionList()) {
+//
+//			RolePermission rp=permissionRepository.findByRoleIdAndResourceId(p.getRoleId(),p.getResourceId());
+//
+//			rp.setCanView(p.isCanView());
+//			rp.setCanEdit(p.isCanEdit());
+//			rp.setCanAdd(p.isCanAdd());
+//			rp.setCanDelete(p.isCanDelete());
+//			System.out.println(rp);
+//			permissionRepository.save(rp);
+//
+//		}
+//		return "success";
+//	}
 
 	@Override
 	public String deleteResource(int id) {
@@ -126,9 +126,9 @@ public class AccessServiceImpl implements AccessService {
 	}
 
 	@Override
-	public String setRole(UserRole userRole) {
-		userRoleRepository.save(userRole);
-		return "Updated";
+	public UserRole setRole(UserRole userRole) {
+		return userRoleRepository.save(userRole);
+		
 	}
 
 	@Override

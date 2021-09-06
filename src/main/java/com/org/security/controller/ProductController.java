@@ -33,7 +33,7 @@ public class ProductController {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	String baseUrl = "http://Shopitproducts-env.eba-pqdd3ppe.ap-south-1.elasticbeanstalk.com";
+	String baseUrl = "http://localhost:8081";
 
 	
 	@GetMapping("/viewAll")

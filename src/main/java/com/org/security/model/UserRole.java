@@ -77,6 +77,12 @@ public class UserRole {
 		super();
 	}
 
+
+	@Override
+	public String toString() {
+		return "UserRole [id=" + id + ", userId=" + userId + ", roleId=" + roleId + "]";
+	}
+
 	
 	
 	

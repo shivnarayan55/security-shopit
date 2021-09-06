@@ -45,6 +45,13 @@ public class Resource {
 		this.resourceName = resourceName;
 	}
 
+	public Resource(int id, String resourceName, String apiUrl) {
+		super();
+		this.id = id;
+		this.resourceName = resourceName;
+		this.apiUrl = apiUrl;
+	}
+
 	public String getApiUrl() {
 		return apiUrl;
 	}
@@ -56,6 +63,11 @@ public class Resource {
 	@Override
 	public String toString() {
 		return "Resource [id=" + id + ", resourceName=" + resourceName + ", apiUrl=" + apiUrl + "]";
+	}
+
+	public Resource() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 

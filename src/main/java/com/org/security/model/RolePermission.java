@@ -101,6 +101,18 @@ public class RolePermission {
 	public void setCanDelete(boolean canDelete) {
 		this.canDelete = canDelete;
 	}
+
+	public RolePermission(int id, int resourceId, int roleId, boolean canAdd, boolean canEdit, boolean canView,
+			boolean canDelete) {
+		super();
+		this.id = id;
+		this.resourceId = resourceId;
+		this.roleId = roleId;
+		this.canAdd = canAdd;
+		this.canEdit = canEdit;
+		this.canView = canView;
+		this.canDelete = canDelete;
+	}
 	
 	
 	

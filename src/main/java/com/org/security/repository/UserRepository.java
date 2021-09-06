@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.org.security.model.User;
 import com.org.security.model.UserPass;
+import com.org.security.request.UpdateUserRequest;
 
 
 
@@ -22,6 +23,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     User findByEmail(String email);
 	void save(UserPass userPass);
+//	Object saveUserRequest(UpdateUserRequest user);
+	
 	
     
     

@@ -36,6 +36,12 @@ public class Role {
 		this.roleID = roleID;
 	}
 
+	public Role(int roleID, String roleName) {
+		super();
+		this.roleID = roleID;
+		this.roleName = roleName;
+	}
+
 	public String getRoleName() {
 		return roleName;
 	}
@@ -47,6 +53,11 @@ public class Role {
 	@Override
 	public String toString() {
 		return "Role [roleID=" + roleID + ", roleName=" + roleName + "]";
+	}
+
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 ////	public String getRoleDescription() {

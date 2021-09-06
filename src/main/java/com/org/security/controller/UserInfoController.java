@@ -22,6 +22,7 @@ import com.org.security.model.UserRole;
 import com.org.security.repository.UserRepository;
 import com.org.security.repository.UserRoleRepository;
 import com.org.security.request.UpdateUserRequest;
+import com.org.security.service.UserService;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -35,28 +36,36 @@ public class UserInfoController {
 	
 	@Autowired
 	UserRoleRepository userRoleRepository;
+	
+	@Autowired
+	UserService userService;
 
 	
 	@GetMapping("/viewAll")
 	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.VIEW+"')")
 	public List<User> viewUser(){
-		return userRepository.findAll();
+		
+		
+		
+		return userService.getAllUsers();
 	}
 	
-	@PostMapping("/add")
-	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.ADD+"')")
-	public Object createUser(@RequestBody User user) {
-		
-		return userRepository.save(user);
-		
-   
-	}
+//	@PostMapping("/add")
+//	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.ADD+"')")
+//	public Object createUser(@RequestBody User user) {
+//		
+//		return userService.addUser(user);
+//		
+//   
+//	}
 	
 	@DeleteMapping("/delete/{id}")
 	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.DELETE+"')")
 	public String deleteUser(@PathVariable Long id) {
 		
-	    userRepository.deleteById(id);
+		userService.deleteById(id);
+		
+	    
 		
 		return "User Deleted" ;
 	}
@@ -82,23 +91,25 @@ public class UserInfoController {
 	}
 		
 	@PutMapping("/update")
-	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.EDIT+"')")
+//	@PreAuthorize("hasPermission('"+PermissionURLConstants.USER_API_SERVICE+"','"+PermissionURLConstants.EDIT+"')")
     public User updateUser(@RequestBody UpdateUserRequest updateUserRequest )	{
 		
 		
-		UserRole userRole = new UserRole();
+//		UserRole userRole = new UserRole();
+//		
+//		userRole = userRoleRepository.findByUserId(updateUserRequest.getUserId());
+//		userRole.setRoleId(updateUserRequest.getRoleId());
+//		userRoleRepository.save(userRole);
+//		
+//		Long u = Long.parseLong(updateUserRequest.getUserId());
+//		Optional<User> user = userRepository.findById(u);
+//		user.get().setAuthority(updateUserRequest.getAuthority());
+//		user.get().setEmail(updateUserRequest.getEmail());
+//		user.get().setName(updateUserRequest.getName());
+//		user.get().setUsername(updateUserRequest.getUsername());
+//		return userRepository.save(user.get());
 		
-		userRole = userRoleRepository.findByUserId(updateUserRequest.getUserId());
-		userRole.setRoleId(updateUserRequest.getRoleId());
-		userRoleRepository.save(userRole);
-		
-		Long u = Long.parseLong(updateUserRequest.getUserId());
-		Optional<User> user = userRepository.findById(u);
-		user.get().setAuthority(updateUserRequest.getAuthority());
-		user.get().setEmail(updateUserRequest.getEmail());
-		user.get().setName(updateUserRequest.getName());
-		user.get().setUsername(updateUserRequest.getUsername());
-		return userRepository.save(user.get());
+		return userService.updateUser(updateUserRequest);
 		
 						
 		
